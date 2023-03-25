@@ -9,11 +9,19 @@ export class StarWarsService {
         private readonly httpRequest: HttpService
     ) { }
 
-    public async findAll(): Promise<Array<IStarWars>> {
+    public async findCharacters(): Promise<Array<IStarWars>> {
         const url = "https://swapi.dev/api/people";
-        const response = await lastValueFrom(
+        const { results } = await lastValueFrom(
             this.httpRequest.get(url).pipe(map((r) => r.data))
         );
-        return response?.results;
+        return results;
+    }
+
+    public async findOtherPage(page: string): Promise<Array<IStarWars>> {
+        const url = `https://swapi.dev/api/people/?page=${page}`;
+        const { results } = await lastValueFrom(
+            this.httpRequest.get(url).pipe(map((r) => r.data))
+        );
+        return results;
     }
 }

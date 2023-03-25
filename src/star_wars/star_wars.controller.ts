@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { IStarWars } from './interface/IStar_wars';
 import { StarWarsService } from './star_wars.service';
 
@@ -6,9 +6,14 @@ import { StarWarsService } from './star_wars.service';
 export class StarWarsController {
     constructor(private readonly starWarsService: StarWarsService) { }
 
-    @Get()
-    findAll(): Promise<Array<IStarWars>> {
-        return this.starWarsService.findAll();
+    @Get('/characters')
+    findCharacters(): Promise<Array<IStarWars>> {
+        return this.starWarsService.findCharacters();
+    }
+
+    @Get('/characters/otherPage/:page')
+    findOtherPage(@Param('page') page: string): Promise<Array<IStarWars>> {
+        return this.starWarsService.findOtherPage(page);
     }
 
 }
