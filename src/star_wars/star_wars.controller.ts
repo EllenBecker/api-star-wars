@@ -16,4 +16,9 @@ export class StarWarsController {
         return this.starWarsService.findOtherPage(page);
     }
 
+    @Get('/characters/search/:name')
+    findBySearch(@Param('name') name: string): Promise<Array<IStarWars>> {
+        return this.starWarsService.findBySearch(name);
+    }
+
 }

@@ -24,4 +24,12 @@ export class StarWarsService {
         );
         return results;
     }
+
+    public async findBySearch(name: string): Promise<Array<IStarWars>> {
+        const url = `https://swapi.dev/api/people/?search=${name}`;
+        const { results } = await lastValueFrom(
+            this.httpRequest.get(url).pipe(map((r) => r.data))
+        );
+        return results;
+    }
 }
