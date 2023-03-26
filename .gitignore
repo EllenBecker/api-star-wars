@@ -37,3 +37,6 @@ lerna-debug.log*
 
 #README
 README.md
+
+#dotenv
+.env

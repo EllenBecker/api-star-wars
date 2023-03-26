@@ -1,2 +1,2 @@
-declare const _default: Promise<import("@nestjs/common").INestApplication>;
+declare const _default: Promise<any>;
 export default _default;
