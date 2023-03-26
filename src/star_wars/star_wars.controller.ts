@@ -1,4 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { IFilms } from './interface/IFilms';
 import { IStarWars } from './interface/IStar_wars';
 import { StarWarsService } from './star_wars.service';
 
@@ -19,6 +20,11 @@ export class StarWarsController {
     @Get('/characters/search/:name')
     findBySearch(@Param('name') name: string): Promise<Array<IStarWars>> {
         return this.starWarsService.findBySearch(name);
+    }
+
+    @Get('/films/:id')
+    findFilmsById(@Param('id') id: string): Promise<IFilms> {
+        return this.starWarsService.findFilmsById(id);
     }
 
 }

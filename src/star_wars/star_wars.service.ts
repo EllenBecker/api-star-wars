@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom, map } from 'rxjs';
 import { IStarWars } from './interface/IStar_wars';
+import { IFilms } from './interface/IFilms';
 
 @Injectable()
 export class StarWarsService {
@@ -31,5 +32,13 @@ export class StarWarsService {
             this.httpRequest.get(url).pipe(map((r) => r.data))
         );
         return results;
+    }
+
+    public async findFilmsById(id: string): Promise<IFilms> {
+        const url = `https://swapi.dev/api/films/${id}`;
+        const data = await lastValueFrom(
+            this.httpRequest.get(url).pipe(map((r) => r.data))
+        );
+        return data;
     }
 }
