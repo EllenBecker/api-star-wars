@@ -12,27 +12,11 @@ export class StarWarsService {
     ) { }
     private readonly BASE_URL = 'https://swapi.dev/api';
 
-    public async findCharacters(): Promise<IReturnParameters> {
-        const url = `${this.BASE_URL}/people`;
-        const { items, totalPages } = await this.getDataAndTotalPages(url);
+    public async findCharacters(query: { page: string, name: string }): Promise<IReturnParameters> {
+        const url = query.name && query.name !== ''
+            ? `${this.BASE_URL}/people/?search=${query.name}&page=${query.page}`
+            : `${this.BASE_URL}/people/?page=${query.page}`;
 
-        return { items, totalPages };
-    }
-
-    public async findOtherPage(page: string): Promise<IReturnParameters> {
-        const url = `${this.BASE_URL}/people/?page=${page}`;
-        const { items, totalPages } = await this.getDataAndTotalPages(url);
-        return { items, totalPages };
-    }
-
-    public async findBySearch(name: string): Promise<IReturnParameters> {
-        const url = `${this.BASE_URL}/people/?search=${name}`;
-        const { items, totalPages } = await this.getDataAndTotalPages(url);
-        return { items, totalPages };
-    }
-
-    public async findBySearchOtherPage(name: string, page: string): Promise<IReturnParameters> {
-        const url = `${this.BASE_URL}/people/?search=${name}&page=${page}`;
         const { items, totalPages } = await this.getDataAndTotalPages(url);
         return { items, totalPages };
     }

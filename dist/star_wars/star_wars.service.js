@@ -18,23 +18,10 @@ let StarWarsService = class StarWarsService {
         this.httpRequest = httpRequest;
         this.BASE_URL = 'https://swapi.dev/api';
     }
-    async findCharacters() {
-        const url = `${this.BASE_URL}/people`;
-        const { items, totalPages } = await this.getDataAndTotalPages(url);
-        return { items, totalPages };
-    }
-    async findOtherPage(page) {
-        const url = `${this.BASE_URL}/people/?page=${page}`;
-        const { items, totalPages } = await this.getDataAndTotalPages(url);
-        return { items, totalPages };
-    }
-    async findBySearch(name) {
-        const url = `${this.BASE_URL}/people/?search=${name}`;
-        const { items, totalPages } = await this.getDataAndTotalPages(url);
-        return { items, totalPages };
-    }
-    async findBySearchOtherPage(name, page) {
-        const url = `${this.BASE_URL}/people/?search=${name}&page=${page}`;
+    async findCharacters(query) {
+        const url = query.name && query.name !== ''
+            ? `${this.BASE_URL}/people/?search=${query.name}&page=${query.page}`
+            : `${this.BASE_URL}/people/?page=${query.page}`;
         const { items, totalPages } = await this.getDataAndTotalPages(url);
         return { items, totalPages };
     }

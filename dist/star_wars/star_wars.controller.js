@@ -19,17 +19,8 @@ let StarWarsController = class StarWarsController {
     constructor(starWarsService) {
         this.starWarsService = starWarsService;
     }
-    findCharacters() {
-        return this.starWarsService.findCharacters();
-    }
-    findOtherPage(page) {
-        return this.starWarsService.findOtherPage(page);
-    }
-    findBySearch(name) {
-        return this.starWarsService.findBySearch(name);
-    }
-    findBySearchOtherPage(name, page) {
-        return this.starWarsService.findBySearchOtherPage(name, page);
+    findCharacters(query) {
+        return this.starWarsService.findCharacters(query);
     }
     findFilmsById(id) {
         return this.starWarsService.findFilmsById(id);
@@ -37,32 +28,11 @@ let StarWarsController = class StarWarsController {
 };
 __decorate([
     (0, common_1.Get)('/characters'),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], StarWarsController.prototype, "findCharacters", null);
-__decorate([
-    (0, common_1.Get)('/characters/otherPage/:page'),
-    __param(0, (0, common_1.Param)('page')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], StarWarsController.prototype, "findOtherPage", null);
-__decorate([
-    (0, common_1.Get)('/characters/search/:name'),
-    __param(0, (0, common_1.Param)('name')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], StarWarsController.prototype, "findBySearch", null);
-__decorate([
-    (0, common_1.Get)('/characters/search/:name/otherPage/:page'),
-    __param(0, (0, common_1.Param)('name')),
-    __param(1, (0, common_1.Param)('page')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", Promise)
-], StarWarsController.prototype, "findBySearchOtherPage", null);
 __decorate([
     (0, common_1.Get)('/films/:id'),
     __param(0, (0, common_1.Param)('id')),
