@@ -3,8 +3,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // todo: desabilidato pois o vercel configurar o CORS
-  // app.enableCors();
-  return await app.listen(process.env.PORT);
+  app.enableCors();
+  return await app.listen(3000);
 }
-export default bootstrap();
+bootstrap();
